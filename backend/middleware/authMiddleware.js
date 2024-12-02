@@ -8,7 +8,7 @@ const authMiddleware = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, 'yourefde70f51cef4b21eb4ded0230aa5f4099d4cb2e403e413341a920375032309129b62e86a7b7c5391692bf27cf58c2e39af1e44be11682ac42eab673a525d569'); // Replace with your secret key
+    const decoded = jwt.verify(token, 'YOUR JWT SECRET KEY'); // Replace with your secret key
     req.userId = decoded.id; // Attach user ID to the request object
     req.username = decoded.username; // Attach username to the request object
     next();
