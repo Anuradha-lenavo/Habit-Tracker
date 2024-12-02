@@ -1,0 +1,487 @@
+/* Container for the entire header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #121212; /* Dark background */
+  padding: 1rem 1.5rem;
+  color: white;
+  border-radius: 8px;
+}
+
+body {
+  height: 100vh;
+  background-color: #b3bab99a;
+  background-position: center;
+  background-size: cover;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Logo section with dots and title */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+/* Green and white dots */
+.green {
+  background-color: #00ff00; /* Green dot */
+}
+
+.white {
+  background-color: #ffffff; /* White dot */
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+/* Subtitle text */
+.header p {
+  font-size: 0.9rem;
+  color: #b0b0b0; /* Light gray text */
+  margin: 0;
+}
+
+/* Add button */
+.add-button {
+  background-color: #00c853; /* Bright green button */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 40rem;
+}
+
+/* Modal overlay styling */
+.habit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal styling */
+.habit-modal {
+  background: #333;
+  padding: 2rem;
+  border-radius: 8px;
+  color: white;
+  width: 100%;
+  max-width: 400px; /* Adjust the max width to be responsive */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 10px;
+  
+  max-width: 400px; /* Max width to ensure it doesn't stretch too wide */
+  max-height: 80vh; /* Max height to make it scrollable when content overflows */
+  overflow-y: auto; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.habit-modal h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Input fields, text area, and select fields */
+.habit-modal input,
+.habit-modal textarea{
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  width: 94%;
+  background-color: #444;
+  color: white;
+}
+.habit-modal select {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  background-color: #444;
+  color: white;
+}
+
+.habit-modal input[type="checkbox"] {
+  background-color: #4017e2;
+  margin-left: -60px;
+  margin-top: -10px;
+}
+
+/* Category, Frequency, and Reminder Time Fields */
+.habit-modal label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+  color: #b0b0b0;
+  
+}
+
+/* Buttons inside the modal */
+.habit-modal button {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background-color: #00c853;  /* Bright Green */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.habit-modal button[type="button"] {
+  background-color: #777; /* Gray for cancel button */
+  margin-left: 10px;
+}
+
+.habit-modal button:hover {
+  background-color: #4caf50;  /* Darker green on hover */
+}
+
+.habit-modal p {
+  margin-bottom: 10px;
+  font-size: 0rem;
+  color: #bbb;
+}
+
+/* Styling for checkbox inside modal */
+.habit-modal input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-left: 20px;
+}
+
+/* Modal Close Button */
+.habit-modal button.close-modal {
+  background-color: #f44336;  /* Red close button */
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Overlay for the Add Habit Modal */
+.habit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* Success Message Modal Overlay */
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.success-modal {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Habit List */
+.habit-list h2{
+  margin-left: 550px;
+}
+
+.habit-card {
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: left;
+margin-left:100px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.habit-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.habit-card .description,
+.habit-card .start-date {
+  margin: 2px ;
+  padding: 1px ;
+  border-top: 1px solid #eee;
+  color: #666;
+  font-size: 16px;
+}
+
+.habit-card .start-date {
+  font-weight: bold;
+}
+
+.habit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.habit-name {
+  flex-grow: 1; /* This makes the habit name take available space */
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.habit-actions {
+  display: flex;
+  gap: 10px; /* Space between icons */
+}
+
+.action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.action-button.delete {
+  color: #e57373; /* Red for delete */
+}
+
+/* Default button styles */
+.circle-button1,
+.circle-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(201, 201, 10); /* Default background (Yellow) */
+  color: rgb(245, 245, 240); /* Text color (White) */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Style for the skipped button (red) */
+.circle-button1.clicked-red {
+  background-color: red;
+  color: white;
+}
+
+/* Style for the completed button (green) */
+.circle-button.clicked-green {
+  background-color: green;
+  color: white;
+}
+
+/* Add this in your Header.css or a new file */
+.react-calendar .react-calendar__tile.completed {
+  background-color: #4CAF50; /* Green for completed */
+  color: white;
+}
+
+.react-calendar .react-calendar__tile.skipped {
+  background-color: #F44336; /* Red for skipped */
+  color: white;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+ 
+}
+
+
+
+.calendar-and-chart {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  bottom: 100px;
+}
+
+.calendar-container {
+  flex: 1;
+  margin-right: 20px; /* Add space between the calendar and the chart */
+}
+
+.chart-container {
+  flex: 1;
+  height: 500px; /* Adjust the height as needed */
+}
+
+/* Optional styles for media queries */
+@media (max-width: 768px) {
+  .habit-modal {
+    width: 90%;
+    max-width: 90%;
+  }
+
+  .habit-modal button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+
+
+  .habit-list {
+    padding: 10px;
+  }
+
+}
+.habit-modal-overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -10;
+ 
+}
+.habit-modal-overlay1 h2{
+  margin-top: -20px;
+}
+
+.habit-modal1 {
+  background: white;
+  padding: 50px 40px;
+  border-radius: 10px;
+  max-width: 800px;
+  max-height: 200px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100; /* Ensure it's on top of overlay */
+/* Max width to ensure it doesn't stretch too wide */
+  max-height: 80vh; /* Max height to make it scrollable when content overflows */
+margin-top: 10px;
+}
+
+.logout-button{
+
+  background-color: #00c853; /* Bright green button */
+  color: white;
+  border: none;
+  border-radius: 5%;
+  width: 95px;
+  height: 35px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4rem;
+}
+
+.stats-container1 {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px; /* Space between the sections */
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 25px; /* Adjust this value as needed */
+  right: 205px; /* Adjust this value as needed */
+  background: none;
+  border: none;
+  font-size: 1.5rem; /* Makes the button easily clickable */
+  cursor: pointer;
+}
+
+.modal-close-button:hover {
+  color: red; /* Optional: Highlight on hover */
+}
+
+@media (max-width: 1024px) {
+  .habit-card {
+    margin-left: 50px;
+  }
+
+  .habit-modal {
+    max-width: 80%;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .habit-list h2 {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .habit-card {
+    padding: 15px;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .habit-card {
+    padding: 10px;
+  }
+}
+
+
