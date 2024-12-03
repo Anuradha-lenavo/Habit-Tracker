@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id }, 'your JWT SECRET', { expiresIn: '1h' });
+    const token = jwt.sign({ id: newUser._id }, 'yourefde70f51cef4b21eb4ded0230aa5f4099d4cb2e403e413341a920375032309129b62e86a7b7c5391692bf27cf58c2e39af1e44be11682ac42eab673a525d569', { expiresIn: '1h' });
     res.status(201).json({ token });
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong' });
@@ -64,8 +64,8 @@ router.post('/send-otp', async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'Youremail@gmail.com',
-        pass: 'your app password', // Use app password here
+        user: 'rajeshwarim20004@gmail.com',
+        pass: 'vqaw uunk qgcv ozcb', // Use app password here
       },
     });
 
