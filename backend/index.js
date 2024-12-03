@@ -12,7 +12,7 @@ const cronJobs = require('./cronJobs');
 app.use(express.json());
 app.use(cors());
 // Connect to MongoDB
-mongoose.connect('MONGO MONGODB URI', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://127.0.0.1:27017/', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error(err));
 
