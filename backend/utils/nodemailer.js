@@ -1,25 +1,24 @@
-// utils/nodemailer.js
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // or any other email service you want to use
+  service: 'gmail',
   auth: {
-    user:  'YOUR EMAIL',
-        pass: 'YOUR EMAIL APP PASSWORD', // your email password or app password
+    user: 'rajeshwarim20004@gmail.com',
+    pass: 'vqaw uunk qgcv ozcb', // Replace with your app-specific password
   },
 });
 
-const sendReminderEmail = (email, habitName, reminderTime) => {
+const sendReminderEmail = (email, habitName, userName) => {
   const mailOptions = {
-    from:  'YOUR EMAIL',
+    from: 'rajeshwarim20004@gmail.com',
     to: email,
     subject: `Reminder for your habit: ${habitName}`,
-    text: `This is a reminder for your habit "${habitName}" scheduled at ${reminderTime}. Don't forget to complete it!`,
+    text: `Hi ${userName},\n\nThis is a reminder for your habit: ${habitName}.\n\nKeep up the good work!\n\nBest regards,\nTrackify`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log('Error sending email:', error);
+      console.error('Error sending email:', error);
     } else {
       console.log('Email sent:', info.response);
     }
