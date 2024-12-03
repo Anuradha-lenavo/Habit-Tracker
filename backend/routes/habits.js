@@ -4,6 +4,8 @@ const User = require('../models/User'); // Ensure User model is imported
 const authMiddleware = require('../middleware/authMiddleware');
 const router = express.Router();
 const cron = require('node-cron');
+const nodemailer = require('nodemailer');
+const schedule = require('node-schedule');
 
 // Fetch all habits for the logged-in user
 router.get('/', authMiddleware, async (req, res) => {
@@ -155,63 +157,49 @@ router.put('/:id', authMiddleware, async (req, res) => {
     res.status(500).json({ message: 'Error updating habit' });
   }
 });
-router.post('/send-reminder', async (req, res) => {
-  const { email, habitName, reminderTime } = req.body;
+// Configure Nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'Gmail', // or another email service
+  auth: {
+    user: 'your-email@gmail.com', // Replace with your email
+    pass: 'your-email-password', // Replace with your password or app-specific password
+  },
+});
 
-  try {
-    console.log('Validating user...');
-    const existingUser = await User.findOne({ email });
-    if (!existingUser) {
-      return res.status(404).json({ message: 'User does not exist' });
+// Schedule a reminder email
+const scheduleReminder = (habit, user,) => {
+  const { reminderTime, name } = habit;
+  const [hours, minutes] = reminderTime.split(':');
+
+  // Schedule the job
+  schedule.scheduleJob({ hour: parseInt(hours), minute: parseInt(minutes) }, async () => {
+    const mailOptions = {
+      from: 'rajeshwarim20004@gmail.com',
+      to: user.email, // Replace with the user's email
+      subject: `Reminder: ${name}`,
+      text: `Hi ${user.name},\n\nThis is a reminder for your habit: ${name}.\n\nKeep up the good work!\n\nBest regards,\nTrackify`,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log('Reminder email sent!');
+    } catch (error) {
+      console.error('Error sending email:', error);
     }
+  });
+};
 
-    console.log('Scheduling reminder...');
-    reminderMap.set(email, { habitName, reminderTime });
+// Example usage: Schedule for all habits with reminders
+const habits = [
+  { name: 'Morning Yoga', reminderTime: '07:30' },
+  { name: 'Read a book', reminderTime: '20:00' },
+];
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'your-email@gmail.com',
-        pass: 'your-app-password', // Use app password here
-      },
-    });
+const user = { name: 'John Doe', email: 'johndoe@example.com' };
 
-    console.log('Sending reminder email...');
-    await transporter.sendMail({
-      from: 'your-email@gmail.com',
-      to: email,
-      subject: `Reminder for Your Habit: ${habitName}`,
-      text: `Hi! This is a reminder to complete your habit "${habitName}" scheduled at ${reminderTime}.`,
-    });
-
-    console.log('Reminder email sent successfully');
-    res.json({ success: true, message: 'Reminder scheduled and email sent successfully' });
-  } catch (error) {
-    console.error('Error in /send-reminder:', error);
-    res.status(500).json({ message: 'Failed to send reminder' });
+habits.forEach((habit) => {
+  if (habit.reminderTime) {
+    scheduleReminder(habit, user);
   }
 });
-
-
-router.post('/validate-reminder', (req, res) => {
-  const { email } = req.body;
-
-  const reminder = reminderMap.get(email);
-  if (!reminder) {
-    return res.status(404).json({ message: 'No reminder found for this email' });
-  }
-
-  const currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
-  const { reminderTime, habitName } = reminder;
-
-  if (currentTime >= reminderTime) {
-    reminderMap.delete(email); // Remove the reminder after validation
-    res.json({ success: true, message: `It's time for your habit: ${habitName}` });
-  } else {
-    res.status(400).json({ message: `Not yet time for the habit: ${habitName}` });
-  }
-});
-
-
-
 module.exports = router;
